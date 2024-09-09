@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #3B4664;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        #cal {
+            background-color: #181F32;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        #ip {
+            padding: 1.2em 0.7em;
+            font-size: 1.5em;
+            background-color: #181F32;
+            color: #ffffff;
+            text-align: right;
+            border-radius: 5px;
+            border: none;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        #v {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            padding: 12px 5px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 1.2em;
+            font-weight: 900;
+            background-color: #EAE3DB;
+            color: #3B4664;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="reset"] {
+            padding: 10px;
+            font-size: 1em;
+            font-weight: 600;
+            background-color: #647299;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"] {
+            padding: 10px;
+            font-size: 0.8em;
+            font-weight: 900;
+            background-color: #D13F30;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:active,
+        input[type="reset"]:active {
+            background-color: #50597b;
+            color: #ffffff;
+        }
+
+        input[type="submit"]:active {
+            background-color: #63e8a3;
+        }
+
+        input[type="reset"],
+        input[type="submit"] {
+            grid-column: span 2;
+        }
+
+        p {
+            font-size: large;
+            font-weight: bold;
+            color: #ffffff;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="area">
+        <p>calc</p>
+        <input type="text" id="ip">
+    </div>
+
+    <div id="cal">
+        <div id="v">
+            <button class="val">7</button>
+            <button class="val">8</button>
+            <button class="val">9</button>
+            <button class="val" style="background-color: #647299; color: #ffffff; font-weight:normal; ">DEL</button>
+
+            <button class="val">4</button>
+            <button class="val">5</button>
+            <button class="val">6</button>
+            <button class="val">+</button>
+
+            <button class="val">1</button>
+            <button class="val">2</button>
+            <button class="val">3</button>
+            <button class="val">-</button>
+
+            <button class="val">.</button>
+            <button class="val">0</button>
+            <button class="val">/</button>
+            <button class="val">x</button>
+
+            <input type="reset" id="reset" value="RESET">
+            <input type="submit" id="sub" value="=">
+        </div>
+    </div>
+
+</body>
+<script>
+    let input = document.getElementById("ip");
+    let buttons = document.querySelectorAll("button.val");
+    let currentInput = '';
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function () {
+            let value = this.innerText;
+
+            if (value === 'DEL') {
+                currentInput = currentInput.slice(0, -1);
+            } else {
+                currentInput += value;
+            }
+            input.value = currentInput;
+        });
+    });
+
+    document.getElementById('reset').addEventListener('click', function () {
+        currentInput = '';
+        input.value = '';
+    });
+
+    document.getElementById('sub').addEventListener('click', function () {
+        try {
+            input.value = eval(currentInput.replace('x', '*'));
+            currentInput = input.value;
+        } catch (error) {
+            input.value = 'Error';
+        }
+    });
+
+
+
+</script>
+
+</html>
