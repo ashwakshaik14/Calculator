@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
+    <title>Responsive Calculator</title>
     <style>
         * {
             padding: 0;
@@ -27,6 +27,8 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 100%;
+            width: 350px;
         }
 
         #ip {
@@ -49,7 +51,7 @@
         }
 
         button {
-            padding: 10px;
+            padding: 15px;
             font-size: 1.2em;
             font-weight: 900;
             background-color: #EAE3DB;
@@ -57,10 +59,12 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        input[type="reset"] {
-            padding: 10px;
+        input[type="reset"],
+        input[type="submit"] {
+            padding: 15px;
             font-size: 1em;
             font-weight: 600;
             background-color: #647299;
@@ -68,21 +72,18 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            grid-column: span 2;
+            transition: background-color 0.3s ease;
         }
 
         input[type="submit"] {
-            padding: 10px;
-            font-size: 0.8em;
-            font-weight: 900;
             background-color: #D13F30;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            font-weight: 900;
         }
 
         button:active,
-        input[type="reset"]:active {
+        input[type="reset"]:active,
+        input[type="submit"]:active {
             background-color: #50597b;
             color: #ffffff;
         }
@@ -91,16 +92,36 @@
             background-color: #63e8a3;
         }
 
-        input[type="reset"],
-        input[type="submit"] {
-            grid-column: span 2;
-        }
-
         p {
             font-size: large;
             font-weight: bold;
             color: #ffffff;
             padding: 5px;
+            text-align: center;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 500px) {
+            #cal {
+                width: 90vw;
+                padding: 10px;
+            }
+
+            button, 
+            input[type="reset"], 
+            input[type="submit"] {
+                padding: 10px;
+                font-size: 1em;
+            }
+
+            #ip {
+                font-size: 1.2em;
+                padding: 10px;
+            }
+
+            #v {
+                gap: 10px;
+            }
         }
     </style>
 </head>
@@ -116,7 +137,7 @@
             <button class="val">7</button>
             <button class="val">8</button>
             <button class="val">9</button>
-            <button class="val" style="background-color: #647299; color: #ffffff; font-weight:normal; ">DEL</button>
+            <button class="val" style="background-color: #647299; color: #ffffff; font-weight: normal;">DEL</button>
 
             <button class="val">4</button>
             <button class="val">5</button>
@@ -170,9 +191,6 @@
             input.value = 'Error';
         }
     });
-
-
-
 </script>
 
 </html>
