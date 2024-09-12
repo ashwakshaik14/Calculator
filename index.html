@@ -175,14 +175,22 @@
         input.value = '';
     });
 
-    document.getElementById('sub').addEventListener('click', function () {
-        try {
-            input.value = eval(currentInput.replace('x', '*'));
-            currentInput = input.value;
-        } catch (error) {
-            input.value = 'Error';
+document.getElementById('sub').addEventListener('click', function () {
+    try {
+        let result = eval(currentInput.replace('x', '*'));
+        
+        // Check if the result is a floating-point number
+        if (result % 1 !== 0) {
+            result = result.toFixed(3); // Limit to 3 decimal places
         }
-    });
+
+        input.value = result;
+        currentInput = input.value;
+    } catch (error) {
+        input.value = 'Error';
+    }
+});
+
 
 
 
